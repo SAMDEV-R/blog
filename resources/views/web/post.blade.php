@@ -3,9 +3,8 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-8">
-                <h1>Lista de Artículos</h1>
+                <h1>{{$post->name}}</h1>
 
-                @foreach($posts as $post)
                 <div class="row"> 
                     <div class="card">
                         @if($post->file)
@@ -13,16 +12,20 @@
                         @endif
                         <div class="card-body">
                             <div class="card-title">
-                                {{ $post->name }}
+                                Categoría
+                                <a href="#">{{$post->category->name}}</a>
                             </div>            
                             {{ $post->excerpt }}
-                            <a href="{{ route('post',$post->slug) }}" class="card-link">Leer más...</a>
+                            <hr>
+                            {!! $post->body !!}
+                            <hr>
+                            Etiquetas
+                            @foreach($post->tags as $tag)
+                                <a href="#">{{$tag->name}}</a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <br>
-                @endforeach
-                {{ $posts->render() }}
             </div>
         </div>
     </div>
